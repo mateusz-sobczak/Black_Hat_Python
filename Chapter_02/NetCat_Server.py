@@ -9,7 +9,6 @@ import subprocess
 # Global Variables
 listen              = False
 command             = False
-upload              = False
 execute             = ''
 target              = '0.0.0.0'
 upload_destination  = ''
@@ -76,8 +75,8 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', metavar='[port]', help='specify target port', type=int, required=True)
     
     parser.add_argument('-c', '--command', metavar='[command]', help='initialize command shell', type=bool)
-    parser.add_argument('-u', '--upload', metavar='[destination]', help='Upon recieving a connection upload a file and write to [destination]', type=bool)
-    parser.add_argument('-e', '--execute',metavar='[file_to_run]', help='execute given file upon recieving a connection')
+    parser.add_argument('-u', '--upload', metavar='[destination]', help='Upon recieving a connection upload a file and write to [destination]', type=str)
+    parser.add_argument('-e', '--execute',metavar='[file_to_run]', help='execute given file upon recieving a connection', type=str)
 
     args = parser.parse_args()
 
@@ -85,13 +84,13 @@ if __name__ == '__main__':
         listen = args.listen
     if args.command != None:
         command = args.command
-    if args.target != None:
-        upload = args.upload
+    if args.upload != None:
+        upload_destination = args.upload
     if args.execute != None:
         execute = args.execute
     if args.target != None:
         target = args.target
-    if args.target != None:
+    if args.port != None:
         port = args.port
 
     if listen:
