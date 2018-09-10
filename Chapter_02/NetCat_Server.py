@@ -49,6 +49,16 @@ class RequestHandlerClass(socketserver.BaseRequestHandler):
         request = self.request.recv(4096)
 
         self.request.send(''.encode())
+    
+    def run_command(command):
+        command = command.rstrip()
+
+        try:
+            output = subprocess.check_output(command, stderr=suprocess.STDOUT, shell=True)
+        except:
+            output = 'Failed to execute command.\r\n'
+
+        return output
 
 
 def server_loop():
